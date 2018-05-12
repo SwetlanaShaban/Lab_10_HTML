@@ -20,6 +20,7 @@ namespace TestDispenser
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                //.UseWebRoot("www")
                 .Build();
     }
 }

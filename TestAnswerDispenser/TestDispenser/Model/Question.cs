@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace TestDispenser.Model
 {
@@ -10,7 +9,7 @@ namespace TestDispenser.Model
     {
         private readonly string _questionText;
         private readonly ICollection<Variant> _variants;
-        private int  _correct, _number;
+        private int _correct, _number;
 
         public Question()
         {
@@ -27,20 +26,15 @@ namespace TestDispenser.Model
             _variants = new List<Variant>();
 
             int i = 1;
-            foreach (var variant in variants)
-            {
-                var v = new Variant();
-                v.Number = i;
-                v.Text = variant;
 
-                _variants.Add(v);
-            }
+            variants.ToList().ForEach(x =>
+                _variants.Add(new Variant(i++, x)));
         }
 
         [JsonProperty] public string QuestionText { get; set; }
 
-        [JsonProperty] public ICollection<Variant> Variants { get; set; }
-
+        [JsonProperty] public ICollection<Variant> Variants => _variants;
+       
         [JsonProperty] public int Correct { get; set; }
 
         [JsonProperty] public int Number { get; set; }
