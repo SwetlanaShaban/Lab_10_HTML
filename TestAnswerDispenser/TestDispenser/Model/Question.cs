@@ -9,8 +9,13 @@ namespace TestDispenser.Model
     public class Question
     {
         private readonly string _questionText;
-        private readonly IDictionary<int, string> _variants;
-        private readonly int _correct;
+        private readonly ICollection<Variant> _variants;
+        private int  _correct, _number;
+
+        public Question()
+        {
+            _variants = new List<Variant>();
+        }
 
         public Question(string questionText, int correct, params string[] variants)
         {
@@ -19,22 +24,25 @@ namespace TestDispenser.Model
 
             _questionText = questionText;
             _correct = correct;
-            _variants = new Dictionary<int, string>();
+            _variants = new List<Variant>();
 
             int i = 1;
             foreach (var variant in variants)
             {
-                _variants.Add(i++, variant);
+                var v = new Variant();
+                v.Number = i;
+                v.Text = variant;
+
+                _variants.Add(v);
             }
         }
 
-        [JsonProperty]
-        private string QuestionText => _questionText;
+        [JsonProperty] public string QuestionText { get; set; }
 
-        [JsonProperty]
-        private IDictionary<int, string> Variants => _variants;
+        [JsonProperty] public ICollection<Variant> Variants { get; set; }
 
-        [JsonProperty]
-        private int Correct => _correct;
+        [JsonProperty] public int Correct { get; set; }
+
+        [JsonProperty] public int Number { get; set; }
     }
 }

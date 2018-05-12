@@ -1,0 +1,14 @@
+﻿#1 Question_1:3
+1. A
+2. B
+3. C
+4. D
+#2 Question_2:4
+1. 111
+2. 1233
+3. 5345345
+4. 543534
+#3 Question_3:1
+1. ABCD
+2. AAAAA
+3. KOILL
